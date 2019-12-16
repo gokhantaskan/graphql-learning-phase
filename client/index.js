@@ -1,6 +1,10 @@
-const gqlUrl = "http://localhost:9000/"
+import "babel-core/register";
+import "babel-polyfill";
 
-async function fetchData() {
+const gqlUrl = "http://localhost:9000/";
+const preTag = document.querySelector("#preTag");
+
+const fetchData = async () => {
     const response = await fetch(gqlUrl, {
         method: "post",
         headers: {
@@ -15,8 +19,7 @@ async function fetchData() {
         })
     });
 
-    const responseBody = await response.json();
-    console.log(responseBody);
+    preTag.innerHTML = JSON.stringify(await response.json());
 }
 
 fetchData();
